@@ -9,6 +9,7 @@ a{color:var(--accent)}img{max-width:100%;display:block}
 .top nav{display:flex;gap:18px;flex-wrap:wrap}.top nav a{color:#cdd6e4;text-decoration:none;font-size:15px}.top nav a:hover,.top nav a[aria-current]{color:#fff}
 .pagehead,.band-photo{background:linear-gradient(rgba(13,22,38,.35),rgba(13,22,38,.85)),var(--bg,none) center/cover,var(--navy);color:#fff}
 .hero-img{height:58vh;min-height:340px;background:var(--bg) center/cover,var(--navy)}
+.cta .beta{border-color:var(--accent2);color:#fff}.betanote{max-width:34em;color:#aebbd0;margin-top:12px}
 .sports{list-style:none;display:flex;gap:30px;margin:0 0 14px;padding:0;color:#7fd6d0}.sports li{display:flex;align-items:center;gap:9px}.sports span{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#aebbd0}.eyebrow.big{font-size:clamp(17px,2.4vw,22px);font-weight:600;letter-spacing:.02em;text-transform:none;color:#fff}@media(max-width:520px){.sports{gap:16px}.sports span{display:none}}
 .hero{color:#fff;background:var(--navy);padding:44px 0 64px}
 .hero h1{font-size:clamp(36px,6vw,62px)}.lead{font-size:clamp(18px,2.2vw,22px);max-width:40em;color:#dbe3ef}
