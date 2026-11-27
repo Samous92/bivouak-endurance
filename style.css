@@ -91,6 +91,10 @@ ul.ticks{list-style:none;padding:0;margin:0;columns:2 340px;column-gap:34px}ul.t
 .vclose{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(13,22,38,.75);color:#fff;font-size:18px;cursor:pointer}
 .vend{position:absolute;left:0;right:0;bottom:62px;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}.vend[hidden]{display:none}
 .vend button{background:var(--accent);border-color:var(--accent);padding:10px 20px;font-size:16px}.vend a{color:#fff;font-weight:600;text-decoration:underline}
+.hero-img.home-band{height:min(44.5vw,78vh);min-height:320px;background:var(--bg) center bottom/cover,var(--navy)}
 .vmob{display:none}
-@media(max-width:899px){.home-band{height:42vh;min-height:250px}.home-band .vcard{display:none}.vmob{display:block;margin:22px 0 6px}.vmob .vcard{position:static;transform:none;width:100%;max-width:420px;display:block}.vmob .vthumb{aspect-ratio:16/9}.vmob .vcard:hover,.vmob .vcard:focus-visible{transform:scale(1.01)}}
+@media(max-width:899px){.home-band{display:none}.hero{background:linear-gradient(rgba(13,22,38,.84),rgba(13,22,38,.95)),url(img/hero.jpg) center/cover,var(--navy);padding-top:22px}
+.vmob{display:block;margin:22px 0 8px}.vmob .vcard{position:static;transform:none;width:min(100%,calc(58vh*9/16 + 20px));display:block;margin:0 auto}
+.vmob .vthumb{aspect-ratio:9/16}.vmob .vcard:hover,.vmob .vcard:focus-visible{transform:scale(1.01)}}
 @media(prefers-reduced-motion:reduce){.vcard{transition:none}}
+.vbar button{white-space:nowrap}@media(max-width:520px){.vbar{gap:6px}.vbar button{font-size:12px;padding:8px 10px}}
