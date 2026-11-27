@@ -71,3 +71,25 @@ ul.ticks{list-style:none;padding:0;margin:0;columns:2 340px;column-gap:34px}ul.t
 @media(max-width:860px){.fdetail{grid-template-columns:minmax(0,1fr)}.fshot{max-width:230px;margin:0 auto}}
 @media(max-width:860px){.bricks{grid-template-columns:repeat(2,minmax(0,1fr))}.explorer{grid-template-columns:minmax(0,1fr)}}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}.mail{overflow-wrap:anywhere}@media(max-width:520px){.top nav{gap:6px 14px}.top nav a{font-size:14px}.mail{font-size:clamp(16px,5.4vw,22px)}}
+
+/* Accueil : vidéo de présentation dès le premier regard */
+.hero{background:linear-gradient(rgba(13,22,38,.84),rgba(13,22,38,.95)),url(img/hero.jpg) center/cover,var(--navy);padding:34px 0 56px}
+.hero-grid{display:grid;gap:22px 48px;grid-template-columns:minmax(0,5fr) minmax(0,6fr);grid-template-areas:"head video" "rest video";align-items:start}
+.hero-head{grid-area:head;align-self:end}.hero-rest{grid-area:rest}.hero-video{grid-area:video;margin:0;align-self:center}
+.hero-grid h1{font-size:clamp(32px,4.2vw,54px)}
+.hv-frame{position:relative;border-radius:18px;overflow:hidden;background:#0d1626;box-shadow:0 18px 60px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.14)}
+.hero-video video{display:block;width:100%;height:auto;background:#0d1626}
+.hero-video[data-fmt=land] video{aspect-ratio:16/9}
+.hero-video[data-fmt=port] video{aspect-ratio:9/16}
+.hero-video[data-fmt=port] .hv-frame{width:min(100%,calc(70vh*9/16));margin:0 auto}
+.hv-bar{position:absolute;left:0;right:0;bottom:0;display:flex;gap:8px;justify-content:flex-end;padding:22px 10px 10px;background:linear-gradient(transparent,rgba(13,22,38,.82))}
+.hv-bar button{font:inherit;font-size:13px;font-weight:600;color:#fff;background:rgba(13,22,38,.72);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:7px 13px;cursor:pointer}
+.hv-bar button:hover,.hv-bar button:focus-visible{background:var(--accent);border-color:var(--accent);outline:none}
+.hero-video figcaption{text-align:center;color:#aebbd0;font-size:14px;margin-top:10px}
+@media(max-width:899px){.hero-grid{grid-template-columns:1fr;grid-template-areas:"head" "video" "rest"}.hero-head{align-self:start}.hv-bar{justify-content:center}.hero-grid h1{font-size:clamp(30px,8vw,44px)}}
+.hero-in.hero-grid{max-width:1280px}
+.hero-grid{grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:18px 44px}
+.hero-video{align-self:start}.hero-head{align-self:start}
+.hero-grid h1{font-size:clamp(30px,3.3vw,46px)}.hero-grid .lead{font-size:clamp(16px,1.35vw,19px)}
+@media(max-width:899px){.hero-grid .sports{display:none}.hero{padding-top:20px}}
+@media(max-width:899px){.hero-grid{grid-template-columns:1fr;grid-template-areas:"head" "video" "rest";gap:18px}.hero-grid h1{font-size:clamp(30px,8vw,44px)}.hero-grid .lead{font-size:18px}}
