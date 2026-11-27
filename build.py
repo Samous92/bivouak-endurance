@@ -108,7 +108,7 @@ def parse_guide(path):
 guide = parse_guide(SRC)
 
 # ---------- gabarit ----------
-NAV = [("index.html", "Accueil"), ("fonctionnalites.html", "Fonctionnalités"), ("tout-en-un.html", "Tout en un coup d’œil"), ("partager.html", "Partage & coach"), ("astuces.html", "Astuces"), ("connexions.html", "Connexions"), ("mode-emploi.html", "Mode d'emploi"), ("assistance.html", "Assistance")]
+NAV = [("index.html", "Accueil"), ("fonctionnalites.html", "Fonctionnalités"), ("tout-en-un.html", "Tout en un coup d’œil"), ("partager.html", "Partage & coach"), ("astuces.html", "Astuces"), ("connexions.html", "Connexions"), ("faq.html", "FAQ"), ("mode-emploi.html", "Mode d'emploi"), ("assistance.html", "Assistance")]
 def page(fname, title, body, desc="", cls=""):
     nav = "".join(f'<a href="{h}"{" aria-current=page" if h == fname else ""}>{t}</a>' for h, t in NAV)
     return f"""<!doctype html>
@@ -124,7 +124,7 @@ def page(fname, title, body, desc="", cls=""):
 <main>{body}</main>
 <footer><div class="wrap foot">
 <div><strong>Bivouak Endurance</strong><br><span class="muted">Application iPhone d’entraînement en endurance.</span></div>
-<div><a href="tout-en-un.html">Tout ce que Bivouak sait faire</a><a href="partager.html">Partage, exports et coach</a><a href="astuces.html">Les petits plus (astuces)</a><a href="connexions.html">Montres &amp; connexions</a><a href="confidentialite.html">Confidentialité</a><a href="conditions.html">Conditions &amp; mentions légales</a><a href="assistance.html">Assistance</a><a href="beta.html">Devenir bêta-testeur</a><a href="mailto:{CONTACT}">{CONTACT}</a></div>
+<div><a href="tout-en-un.html">Tout ce que Bivouak sait faire</a><a href="partager.html">Partage, exports et coach</a><a href="astuces.html">Les petits plus (astuces)</a><a href="connexions.html">Montres &amp; connexions</a><a href="confidentialite.html">Confidentialité</a><a href="conditions.html">Conditions &amp; mentions légales</a><a href="faq.html">Questions fréquentes</a><a href="assistance.html">Assistance</a><a href="beta.html">Devenir bêta-testeur</a><a href="mailto:{CONTACT}">{CONTACT}</a></div>
 </div><p class="wrap tiny muted">© 2026 Bivouak Endurance. Merci à <a href="https://intervals.icu" rel="noopener">Intervals.icu</a>, sur lequel s’appuient les connexions. Apple, iPhone, Apple Watch et App Store sont des marques d’Apple Inc. Garmin est une marque de Garmin Ltd. Intervals.icu, Strava, Coros, Polar, Suunto et Wahoo appartiennent à leurs propriétaires ; Bivouak Endurance est indépendante et n’a aucun partenariat avec eux.</p></footer>
 </body></html>"""
 def write(f, t): open(os.path.join(HERE, f), "w", encoding="utf-8").write(t)
@@ -175,7 +175,7 @@ MOB = '<div class="vmob"><button class="vcard vopen" type="button" aria-haspopup
 HERO_DIALOG = '<dialog class="vdlg" id="vdlg" aria-label="Présentation de Bivouak Endurance"><div class="vwrap" id="vwrap" data-fmt="land">\n<video id="hvid" playsinline preload="none" muted aria-label="Présentation de Bivouak Endurance : de ton objectif à ton jour J"></video>\n<div class="vend" id="vend" hidden><button type="button" id="vreplay">↻ Revoir la vidéo</button><a href="fonctionnalites.html">Découvrir les fonctionnalités</a></div>\n<div class="vbar"><button type="button" id="vsound">🔊 Activer le son</button><button type="button" id="vplay">⏸ Pause</button><button type="button" id="vfull">⛶ Plein écran</button></div>\n<button class="vclose" type="button" id="vclose" aria-label="Fermer la vidéo">✕</button></div></dialog>\n<script>\n(function(){\nvar d=document.getElementById(\'vdlg\'),v=document.getElementById(\'hvid\'),w=document.getElementById(\'vwrap\'),end=document.getElementById(\'vend\');\nvar os=document.querySelectorAll(\'.vopen\');if(!d||!v||!os.length)return;\nvar bs=document.getElementById(\'vsound\'),bp=document.getElementById(\'vplay\'),bf=document.getElementById(\'vfull\');\nfunction want(){return(window.innerWidth<900||window.innerHeight>window.innerWidth*1.05)?\'port\':\'land\'}\nfunction setSrc(){var f=want();w.setAttribute(\'data-fmt\',f);var s=f===\'port\'?\'video/bivouak-portrait.mp4\':\'video/bivouak-paysage.mp4\';\n if(v.getAttribute(\'data-s\')!==s){v.setAttribute(\'data-s\',s);v.poster=f===\'port\'?\'img/poster-portrait.jpg\':\'img/poster-paysage.jpg\';v.src=s;v.load()}}\nfunction start(){end.hidden=true;try{v.currentTime=0}catch(e){}var p=v.play();if(p&&p.catch)p.catch(function(){});bp.textContent=\'⏸ Pause\'}\nvar openV=function(){setSrc();v.muted=true;bs.textContent=\'🔊 Activer le son\';if(d.showModal)d.showModal();else d.setAttribute(\'open\',\'\');start()};for(var i=0;i<os.length;i++)os[i].onclick=openV;\nfunction close(){v.pause();if(d.close)d.close();else d.removeAttribute(\'open\')}\ndocument.getElementById(\'vclose\').onclick=close;\nd.addEventListener(\'click\',function(e){if(e.target===d)close()});\nd.addEventListener(\'close\',function(){v.pause()});\nv.addEventListener(\'ended\',function(){end.hidden=false;bp.textContent=\'▶ Lecture\'});\ndocument.getElementById(\'vreplay\').onclick=start;\nv.addEventListener(\'click\',function(){if(v.paused){v.play();bp.textContent=\'⏸ Pause\'}else{v.pause();bp.textContent=\'▶ Lecture\'}});\nbs.onclick=function(){v.muted=!v.muted;bs.textContent=v.muted?\'🔊 Activer le son\':\'🔇 Couper le son\'};\nbp.onclick=function(){if(v.ended){start();return}if(v.paused){v.play();bp.textContent=\'⏸ Pause\'}else{v.pause();bp.textContent=\'▶ Lecture\'}};\nbf.onclick=function(){var t=w.requestFullscreen?w:v;if(t.requestFullscreen)t.requestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()};\nwindow.addEventListener(\'resize\',function(){if(!d.open)return;var f=want();if(w.getAttribute(\'data-fmt\')!==f){var t=v.currentTime,was=!v.paused;setSrc();v.addEventListener(\'loadedmetadata\',function h(){v.removeEventListener(\'loadedmetadata\',h);try{v.currentTime=t}catch(e){}if(was)v.play()})}});\n})();\n</script>\n'
 index = f"""
 {HOME_BAND}<section class="hero"><div class="hero-in wrap">
-<ul class="sports" aria-label="Natation, vélo, course à pied"><li><svg viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="33" cy="13" r="3.2"/><path d="M8 24l9-5 7 4 5-6"/><path d="M4 33c3 0 3-2.4 6-2.4s3 2.4 6 2.4 3-2.4 6-2.4 3 2.4 6 2.4 3-2.4 6-2.4 3 2.4 6 2.4"/><path d="M4 41c3 0 3-2.4 6-2.4s3 2.4 6 2.4 3-2.4 6-2.4 3 2.4 6 2.4 3-2.4 6-2.4 3 2.4 6 2.4"/></svg><span>Nager</span></li><li><svg viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="31" r="7.5"/><circle cx="37" cy="31" r="7.5"/><path d="M11 31l8-14h11l7 14M19 17l7 14h-15M27 11h6"/></svg><span>Pédaler</span></li><li><svg viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="29" cy="9" r="3.2"/><path d="M26 15l-7 7 7 5-3 10M26 15l7 7 7 1M19 22l-8 2M26 27l8 5v8"/></svg><span>Courir</span></li></ul>
+<ul class="sports" aria-label="Natation, vélo, course à pied"><li><svg viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="33" cy="13" r="3.2"/><path d="M8 24l9-5 7 4 5-6"/><path d="M4 33c3 0 3-2.4 6-2.4s3 2.4 6 2.4 3-2.4 6-2.4 3 2.4 6 2.4 3-2.4 6-2.4 3 2.4 6 2.4"/><path d="M4 41c3 0 3-2.4 6-2.4s3 2.4 6 2.4 3-2.4 6-2.4 3 2.4 6 2.4 3-2.4 6-2.4 3 2.4 6 2.4"/></svg><span>Nager</span></li><li><svg viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="31" r="7.5"/><circle cx="37" cy="31" r="7.5"/><path d="M11 31l8-14h11l7 14M19 17l7 14h-15M27 11h6"/></svg><span>Pédaler</span></li><li><svg viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="31" cy="9" r="3.4"/><path d="M28 15l-6 11M27 17l6 4 5-4M27 17l-6 2-5 5M22 26l9 3-2 10M22 26l-5 8-8 2"/></svg><span>Courir</span></li></ul>
 <p class="eyebrow big">Application iPhone pour les sports d’endurance</p>
 <h1>Ton objectif, ta séance, ton jour J.</h1>
 {MOB}<p class="lead">Prépare ton objectif d’endurance : un plan, ta séance du jour et ta logistique de course, sans compte ni abonnement. Pour la course à pied, le trail, le vélo, la natation et le triathlon, du premier dossard jusqu’à l’Ironman.</p>
@@ -389,6 +389,51 @@ sup = f"""<section class="pagehead" style="--bg:url(img/band-dusk.jpg)"><div cla
 <h2>Questions fréquentes</h2><div class="faq">{fq}</div></div>"""
 write("assistance.html", page("assistance.html", "Assistance", sup))
 
+# ---------- FAQ ----------
+FAQ_SECTIONS = [
+ ("Pour qui est Bivouak ?", [
+  ("Pour quel type de sportif l’app est-elle idéale ?", "Pour les sportifs d’endurance qui veulent un plan clair et tout au même endroit : triathlètes (du format S à l’XL), coureurs à pied (du 5 km au marathon), traileurs, cyclistes, nageurs. Débutants comme confirmés : l’app s’adapte à ton niveau et à ton vocabulaire (noms de séances simples ou techniques). Si tu prépares une course, elle construit ton plan jusqu’au jour J ; si tu t’entraînes sans objectif précis, tu peux t’en servir pour suivre tes sorties, ton matériel et ta forme."),
+  ("Je suis débutant : est-ce adapté ?", "Oui. Sans aucune donnée sur toi, le plan te considère débutant par prudence : volume qui monte doucement, séances intenses introduites plus tard, explications en mots simples et un glossaire dans l’app. Tu n’as besoin ni de montre, ni de capteur : le Tracker GPS du téléphone et la saisie à la main suffisent."),
+  ("Je suis confirmé : y trouverai-je mon compte ?", "Oui. Seuils (FTP, VMA, vitesse critique de nage), tests, structure des séances étape par étape, envoi vers ta montre, import d’un calendrier de coach ou d’Intervals.icu, statistiques détaillées, matériel et usure, nutrition de course, budget. Tu peux passer aux noms techniques des séances dans les réglages."),
+  ("J’ai déjà un coach : est-ce utile ?", "Oui. Tu peux importer les séances que ton coach te prépare (fichier de calendrier ou Intervals.icu), les suivre, les enregistrer et garder le reste (matériel, nutrition, souvenirs) au même endroit. L’app ne remplace pas un entraîneur humain."),
+  ("Pour qui l’app n’est-elle pas faite ?", "Si tu cherches un réseau social, des classements entre amis ou un compte en ligne synchronisé sur plusieurs appareils, ce n’est pas le but : Bivouak garde tout sur ton iPhone, sans compte. L’app n’est pas non plus un avis médical."),
+ ]),
+ ("Prix, appareils et langue", [
+  ("Combien ça coûte ?", "L’app sera payante, achetée sur l’App Store. Le prix sera annoncé avant la sortie. Les bêta-testeurs reçoivent gratuitement la version définitive (voir la charte)."),
+  ("Y a-t-il une version Android ?", "Pas pour l’instant : Bivouak existe sur iPhone. Android est à l’étude pour plus tard, sans date annoncée."),
+  ("L’app existe-t-elle en anglais ?", "Elle est en français pour l’instant. Une version anglaise est la prochaine grande étape."),
+  ("Faut-il créer un compte ?", "Non. Pas de compte, pas d’adresse e-mail demandée pour utiliser l’app."),
+ ]),
+ ("Tes données", [
+  ("Où sont mes données ?", "Sur ton iPhone, et nulle part ailleurs : l’éditeur n’a pas de serveur et ne peut pas les lire. Pas de publicité, pas de pistage. Détails sur la page <a href=\"confidentialite.html\">Confidentialité</a>."),
+  ("Que se passe-t-il si l’app n’est plus mise à jour, ou si le projet s’arrête ?", "On croit à ce projet et on espère t’envoyer des mises à jour pendant de nombreuses années. Mais même si un jour il s’arrêtait, rien ne s’éteint pour toi : tout est enregistré sur ton iPhone, sans serveur ni compte à fermer, donc l’app continue de fonctionner telle quelle, aussi longtemps que ton iPhone la fait tourner. Elle t’appartient, avec tes données. Tu peux à tout moment créer une sauvegarde : sans mot de passe, c’est un simple fichier JSON, lisible par d’autres logiciels (avec mot de passe, il est chiffré et seul Bivouak le rouvre : garde alors ton mot de passe). Tes exports (PDF, CSV) restent à toi aussi. Seuls les petits plus qui dépendent d’un service extérieur (Garmin Connect, Intervals.icu, météo et cartes d’Apple) peuvent évoluer ; l’essentiel, lui, marche sans eux."),
+  ("Et si je perds ou change d’iPhone ?", "Crée régulièrement une sauvegarde (de préférence chiffrée) dans Fichiers ou iCloud Drive : elle contient tout, tracés et vidéos compris, et se restaure sur le nouvel iPhone. Sans sauvegarde, l’éditeur ne peut rien récupérer : c’est la contrepartie d’une app qui garde tout chez toi."),
+  ("L’app marche-t-elle sans internet ?", "L’essentiel oui : plan, séances, Tracker, home trainer, saisie. La météo, les cartes et les connexions (Garmin Connect, Intervals.icu) demandent une connexion."),
+ ]),
+ ("Montres, capteurs et connexions", [
+  ("Est-ce compatible avec ma montre ?", "Garmin : tes activités reviennent via une clé personnelle Garmin Connect. Apple Watch : les séances partent directement vers l’app Entraînement. Coros, Polar, Suunto, Wahoo, Zwift, Strava : via Intervals.icu. Le détail, marque par marque, est sur la page <a href=\"connexions.html\">Connexions</a>."),
+  ("Puis-je l’utiliser sans montre ?", "Oui. Le Tracker GPS du téléphone enregistre tes sorties, le home trainer se pilote en Bluetooth et tu peux saisir une séance à la main. Les connexions évitent de la saisie, elles ne sont jamais obligatoires."),
+  ("Faut-il un compte Intervals.icu ?", "Non, c’est facultatif. Il sert seulement à relier des marques qui n’ouvrent pas d’accès direct aux petites applications."),
+  ("Quels capteurs sont pris en charge ?", "Les capteurs Bluetooth de puissance, de cadence et de fréquence cardiaque, et les home trainers compatibles. Écris-nous si le tien pose problème : la page <a href=\"assistance.html\">Assistance</a> dit comment."),
+ ]),
+ ("Plan d’entraînement et nutrition", [
+  ("Comment mon plan est-il construit ?", "Par des règles écrites, lisibles et calculées sur ton iPhone, à partir de ton objectif, de ton niveau, de tes disponibilités et de ce que tu fais vraiment. Il évolue avec toi : on ne rattrape pas les séances perdues, on garde le cap."),
+  ("Puis-je modifier mon plan ?", "Oui : déplacer, alléger ou remplacer une séance, créer les tiennes, déclarer une séance faite sans montre, signaler une blessure ou une indisponibilité."),
+  ("L’app gère-t-elle la nutrition ?", "Oui : un frigo de produits (gels, barres, boissons, électrolytes, eau), des repères de glucides et d’eau selon la durée de la séance, un plan de nutrition pour ta course. Ce sont des repères à tester à l’entraînement, pas des prescriptions."),
+  ("L’app remplace-t-elle un entraîneur ou un médecin ?", "Non. Elle n’est pas un dispositif médical. Consulte un médecin avant de reprendre ou d’intensifier une pratique."),
+ ]),
+ ("Bêta et assistance", [
+  ("Comment tester avant la sortie ?", "Une bêta est prévue sur TestFlight avec un petit groupe de testeurs, en français. Les modalités et la charte sont sur la page <a href=\"beta.html\">Devenir bêta-testeur</a>."),
+  ("J’ai un problème ou une idée.", "Écris-nous, on lit tout : voir la page <a href=\"assistance.html\">Assistance</a>."),
+ ]),
+]
+_fq = ""
+for _title, _items in FAQ_SECTIONS:
+    _fq += f"<h2>{_title}</h2><div class=\"faq\">" + "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in _items) + "</div>"
+faqpage = f"""<section class="pagehead" style="--bg:url(img/band-dusk.jpg)"><div class="wrap"><h1>Questions fréquentes</h1><p class="lead">Pour qui est Bivouak, ce qu’il fait, et ce qu’il ne fait pas.</p></div></section>
+<div class="wrap legal">{_fq}<p style="margin-top:28px">Une autre question ? <a href="assistance.html">Écris-nous</a>.</p></div>"""
+write("faq.html", page("faq.html", "Questions fréquentes", faqpage, desc="Pour qui est Bivouak Endurance : triathlètes, coureurs, cyclistes, débutants et confirmés. Prix, données, montres, plan d’entraînement, nutrition : les réponses."))
+
 # ---------- CSS ----------
 css = r""":root{--navy:#0d1626;--navy2:#16233a;--ink:#e9edf4;--muted:#9aa7bb;--accent:#c8743a;--accent2:#e39a60;--cream:#f6f1e8;--paper:#fbf8f2;--text:#1c2433}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
@@ -463,6 +508,31 @@ ul.ticks{list-style:none;padding:0;margin:0;columns:2 340px;column-gap:34px}ul.t
 @media(max-width:860px){.fdetail{grid-template-columns:minmax(0,1fr)}.fshot{max-width:230px;margin:0 auto}}
 @media(max-width:860px){.bricks{grid-template-columns:repeat(2,minmax(0,1fr))}.explorer{grid-template-columns:minmax(0,1fr)}}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}.mail{overflow-wrap:anywhere}@media(max-width:520px){.top nav{gap:6px 14px}.top nav a{font-size:14px}.mail{font-size:clamp(16px,5.4vw,22px)}}
+
+/* Accueil : photo + carte vidéo (lecture au clic) */
+.home-band{position:relative}
+.vcard{position:absolute;right:max(4vw,20px);top:50%;transform:translateY(-50%);width:clamp(300px,31vw,450px);padding:10px;border-radius:18px;border:1px solid rgba(255,255,255,.22);background:rgba(13,22,38,.55);backdrop-filter:blur(6px);color:#fff;font:inherit;text-align:left;cursor:pointer;box-shadow:0 14px 44px rgba(0,0,0,.45);transition:transform .2s,border-color .2s}
+.vcard:hover,.vcard:focus-visible{transform:translateY(-50%) scale(1.02);border-color:var(--accent2);outline:none}
+.vthumb{position:relative;display:block;border-radius:11px;overflow:hidden;aspect-ratio:16/9;background:#0d1626}
+.vthumb img{width:100%;height:100%;object-fit:cover}
+.vplay{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:rgba(200,116,58,.95);display:flex;align-items:center;justify-content:center;color:#fff;padding-left:4px;box-shadow:0 4px 18px rgba(0,0,0,.4)}
+.vlabel{display:block;padding:10px 4px 2px}.vlabel strong{display:block;font-size:18px}.vlabel small{display:block;color:#c3cddc;font-size:13px;margin-top:2px}
+.vdlg{border:0;padding:0;background:transparent;width:min(94vw,1240px);max-width:none;max-height:96vh;overflow:visible}
+.vdlg::backdrop{background:rgba(5,9,16,.88)}
+.vwrap{position:relative;margin:0 auto;border-radius:14px;overflow:hidden;background:#0d1626}
+.vwrap video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#0d1626;cursor:pointer}
+.vwrap[data-fmt=port]{width:min(100%,calc(88vh*9/16))}.vwrap[data-fmt=port] video{aspect-ratio:9/16}
+.vbar{position:absolute;left:0;right:0;bottom:0;display:flex;gap:8px;justify-content:center;padding:22px 10px 10px;background:linear-gradient(transparent,rgba(13,22,38,.85))}
+.vbar button,.vend button{font:inherit;font-size:14px;font-weight:600;color:#fff;background:rgba(13,22,38,.75);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:8px 15px;cursor:pointer}
+.vbar button:hover,.vend button:hover,.vbar button:focus-visible,.vend button:focus-visible{background:var(--accent);border-color:var(--accent);outline:none}
+.vclose{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(13,22,38,.75);color:#fff;font-size:18px;cursor:pointer}
+.vend{position:absolute;left:0;right:0;bottom:62px;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}.vend[hidden]{display:none}
+.vend button{background:var(--accent);border-color:var(--accent);padding:10px 20px;font-size:16px}.vend a{color:#fff;font-weight:600;text-decoration:underline}
+.vmob{display:none}
+@media(max-width:899px){.home-band{height:42vh;min-height:250px}.home-band .vcard{display:none}.vmob{display:block;margin:22px 0 6px}.vmob .vcard{position:static;transform:none;width:100%;max-width:300px;margin:0 auto;display:block}.vmob .vthumb{aspect-ratio:9/16}.vmob .vcard:hover,.vmob .vcard:focus-visible{transform:scale(1.01)}}
+@media(prefers-reduced-motion:reduce){.vcard{transition:none}}
+/* Accueil, grand écran : bandeau assez haut pour voir le logo ET « BIVOUAK ENDURANCE » en entier */
+@media(min-width:900px){.home-band{height:min(44.5vw,78vh);min-height:320px;background-position:center bottom}}
 """
 write("style.css", css)
 print("ok", len(guide), "chapitres;", sum(len(c["sections"]) for c in guide), "sections")
